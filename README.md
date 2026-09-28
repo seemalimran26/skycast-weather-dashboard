@@ -1,16 +1,79 @@
-# React + Vite
+# SkyCast - Weather Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SkyCast is a responsive weather dashboard built with React and Tailwind CSS. It provides current weather information, hourly forecasts, daily forecasts, and temperature unit conversion.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Search weather by city name
+- Celsius (°C) and Fahrenheit (°F) conversion
+- Current temperature, humidity, wind speed, pressure, and visibility
+- Hourly weather forecast
+- 5-day weather forecast
+- Error handling for invalid cities, empty searches, and network issues
+- Responsive design for mobile, tablet, and desktop
+- Mobile-friendly sidebar navigation
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- Tailwind CSS
+- JavaScript
+- OpenWeather API
+- Lucide React
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/seemalimran26/skycast-weather-dashboard.git
+cd skycast-weather-dashboard
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up the environment variable
+
+Create a `.env` file in the project root:
+
+```env
+VITE_OPENWEATHER_API_KEY=your_api_key_here
+```
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+## Project Structure
+
+```text
+src/
+├── api/
+│   └── openweather.js
+├── components/
+│   ├── layout/
+│   │   ├── Header.jsx
+│   │   └── Sidebar.jsx
+│   └── weather/
+│       ├── SearchBar.jsx
+│       ├── CurrentWeather.jsx
+│       ├── ForecastStrip.jsx
+│       ├── HourlyStrip.jsx
+│       ├── StatCard.jsx
+│       └── WeatherIcon.jsx
+├── data/
+│   └── mockWeather.js
+└── pages/
+    └── Dashboard.jsx
+```
+
+## Repository
+
+GitHub: [seemalimran26/skycast-weather-dashboard](https://github.com/seemalimran26/skycast-weather-dashboard)

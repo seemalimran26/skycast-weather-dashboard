@@ -7,16 +7,20 @@ function ForecastStrip({ items }) {
 
   return (
     <section className="animate-fade-up rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-      <h3 className="mb-4 text-lg font-semibold">7-Day Forecast</h3>
+      <h3 className="mb-4 text-lg font-semibold">5-Day Forecast</h3>{" "}
       <div className="space-y-2">
         {items.map((d) => (
           <div
             key={d.day}
             className="flex items-center gap-3 rounded-2xl px-3 py-3 transition hover:bg-white/5"
           >
-            <span className="w-10 text-sm font-medium text-slate-300">{d.day}</span>
+            <span className="w-10 text-sm font-medium text-slate-300">
+              {d.day}
+            </span>
             <WeatherIcon name={d.icon} size={26} />
-            <span className="w-8 text-right text-sm text-slate-400">{d.low}°</span>
+            <span className="w-8 text-right text-sm text-slate-400">
+              {d.low}°
+            </span>
 
             <div className="relative h-1.5 flex-1 rounded-full bg-white/10">
               <div

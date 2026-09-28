@@ -26,8 +26,6 @@ const forecastBase = [
   { icon: "rain", high: 26, low: 20 },
   { icon: "storm", high: 25, low: 19 },
   { icon: "partly", high: 28, low: 21 },
-  { icon: "sunny", high: 30, low: 22 },
-  { icon: "cloudy", high: 29, low: 23 },
 ];
 
 export const mockForecast = forecastBase.map((d, i) => ({
