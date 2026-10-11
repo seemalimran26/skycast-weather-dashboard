@@ -13,16 +13,16 @@ function ForecastStrip({ items }) {
         {items.map((d, i) => (
           <div
             key={`${d.day}-${i}`}
-            className="flex items-center gap-3 rounded-2xl px-3 py-3 transition hover:bg-white/10"
+            className="flex flex-nowrap items-center gap-2 rounded-2xl px-2 py-3 transition hover:bg-white/10"
           >
             <span className="w-10 text-sm font-medium text-slate-200">
               {d.day}
             </span>
 
-            <WeatherIcon name={d.icon} size={26} />
+            <WeatherIcon name={d.icon} size={26} className="shrink-0" />
 
-            <span className="w-8 text-right text-sm text-slate-300">
-              {d.low}°
+            <span className="w-14 shrink-0 whitespace-nowrap text-right text-sm text-slate-300">
+              {d.low}°<span className="text-base">C</span>
             </span>
 
             <div className="relative h-1.5 flex-1 rounded-full bg-white/15">
@@ -35,7 +35,9 @@ function ForecastStrip({ items }) {
               />
             </div>
 
-            <span className="w-8 text-sm font-semibold">{d.high}°</span>
+            <span className="w-14 shrink-0 whitespace-nowrap text-right text-sm font-semibold">
+              {d.high}°<span className="text-base">C</span>
+            </span>
           </div>
         ))}
       </div>

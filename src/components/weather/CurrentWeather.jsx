@@ -65,7 +65,7 @@ function CurrentWeather({ data, unit, convertTemp, isSaved, onToggleSave }) {
 
           <h1 className="mt-5 text-8xl font-extralight leading-none tracking-tighter md:text-9xl">
             {temp}°
-            <span className="ml-1 text-4xl font-light text-white/70">
+            <span className="ml-1 text-8xl font-light text-white/70">
               {unit}
             </span>
           </h1>
@@ -92,11 +92,10 @@ function CurrentWeather({ data, unit, convertTemp, isSaved, onToggleSave }) {
             )}
           </div>
         </div>
-
         <WeatherIcon
           name={icon}
           size={150}
-          className="animate-float self-center drop-shadow-[0_10px_25px_rgba(0,0,0,0.3)]"
+          className="absolute right-5 top-24 h-16 w-16 self-center weather-float drop-shadow-[0_10px_25px_rgba(0,0,0,0.3)] sm:static sm:h-36 sm:w-36"
         />
       </div>
     </section>

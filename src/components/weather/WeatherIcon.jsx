@@ -1,61 +1,59 @@
-import {
-  Sun,
-  CloudSun,
-  Cloud,
-  CloudRain,
-  CloudLightning,
-  CloudSnow,
-  CloudFog,
-  CloudMoon,
-  Moon,
-} from "lucide-react";
+import clearDay from "@meteocons/svg/fill/clear-day.svg";
+import clearNight from "@meteocons/svg/fill/clear-night.svg";
+import partlyDay from "@meteocons/svg/fill/partly-cloudy-day.svg";
+import partlyNight from "@meteocons/svg/fill/partly-cloudy-night.svg";
+import cloudy from "@meteocons/svg/fill/cloudy.svg";
+import overcast from "@meteocons/svg/fill/overcast.svg";
+import rain from "@meteocons/svg/fill/rain.svg";
+import dayRain from "@meteocons/svg/fill/partly-cloudy-day-rain.svg";
+import nightRain from "@meteocons/svg/fill/partly-cloudy-night-rain.svg";
+import dayStorm from "@meteocons/svg/fill/thunderstorms-day-rain.svg";
+import nightStorm from "@meteocons/svg/fill/thunderstorms-night-rain.svg";
+import snow from "@meteocons/svg/fill/snow.svg";
+import fogDay from "@meteocons/svg/fill/fog-day.svg";
+import fogNight from "@meteocons/svg/fill/fog-night.svg";
 
-const fallbackIcons = {
-  "01d": Sun,
-  "01n": Moon,
-  "02d": CloudSun,
-  "02n": CloudMoon,
-  "03d": Cloud,
-  "03n": Cloud,
-  "04d": Cloud,
-  "04n": Cloud,
-  "09d": CloudRain,
-  "09n": CloudRain,
-  "10d": CloudRain,
-  "10n": CloudRain,
-  "11d": CloudLightning,
-  "11n": CloudLightning,
-  "13d": CloudSnow,
-  "13n": CloudSnow,
-  "50d": CloudFog,
-  "50n": CloudFog,
+const icons = {
+  "01d": clearDay,
+  "01n": clearNight,
+  "02d": partlyDay,
+  "02n": partlyNight,
+  "03d": cloudy,
+  "03n": cloudy,
+  "04d": overcast,
+  "04n": overcast,
+  "09d": rain,
+  "09n": rain,
+  "10d": dayRain,
+  "10n": nightRain,
+  "11d": dayStorm,
+  "11n": nightStorm,
+  "13d": snow,
+  "13n": snow,
+  "50d": fogDay,
+  "50n": fogNight,
 
-  sunny: Sun,
-  partly: CloudSun,
-  cloudy: Cloud,
-  rain: CloudRain,
-  storm: CloudLightning,
-  snow: CloudSnow,
-  mist: CloudFog,
-  night: Moon,
-  nightCloud: CloudMoon,
+  sunny: clearDay,
+  partly: partlyDay,
+  cloudy,
+  rain,
+  storm: dayStorm,
+  snow,
+  mist: fogDay,
+  night: clearNight,
+  nightCloud: partlyNight,
 };
 
 function WeatherIcon({ name, size = 32, className = "" }) {
-  const isOpenWeatherCode = /^[0-9]{2}[dn]$/.test(name ?? "");
-  const FallbackIcon = fallbackIcons[name] || Cloud;
-
-  if (!isOpenWeatherCode) {
-    return <FallbackIcon size={size} className={className} />;
-  }
+  const src = icons[name] || cloudy;
 
   return (
     <img
-      src={`https://openweathermap.org/img/wn/${name}@2x.png`}
+      src={src}
       alt=""
       width={size}
       height={size}
-      className={`object-contain ${className}`}
+      className={`shrink-0 object-contain ${className}`}
     />
   );
 }
