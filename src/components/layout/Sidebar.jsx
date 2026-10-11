@@ -1,76 +1,63 @@
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { CloudSun, MapPin, Settings } from "lucide-react";
 
-function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+const links = [
+  { to: "/", label: "Weather", icon: CloudSun },
+  { to: "/locations", label: "Locations", icon: MapPin },
+  { to: "/settings", label: "Settings", icon: Settings },
+];
 
+function Sidebar({ isOpen, onClose }) {
   return (
     <>
-      {/* Hamburger Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 p-2 rounded-lg bg-[#0f172a] text-white md:hidden"
-      >
-        {isOpen ? "✕" : "☰"}
-      </button>
-
-      {/* Overlay */}
+      {/* Overlay (mobile only) */}
       {isOpen && (
         <div
-          onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/40 z-30 md:hidden"
-        ></div>
+          onClick={onClose}
+          className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm md:hidden"
+        />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:static top-0 left-0 z-40 w-64 min-h-screen bg-[#0f172a] text-white px-6 py-8 transform transition-transform duration-300
+        className={`fixed left-0 top-0 z-40 flex min-h-screen w-64 transform flex-col border border-white/10 bg-slate-950/80 px-6 py-8 text-white backdrop-blur-xl transition-transform duration-300 md:sticky md:bg-slate-900/80 md:rounded-3xl
         ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
-        <div className="mb-14">
-          <h1 className="text-2xl font-bold tracking-tight">
+        <div className="mb-12">
+          <h1 className="bg-gradient-to-r from-sky-300 to-indigo-300 bg-clip-text text-3xl font-bold tracking-tight text-transparent">
             SkyCast
           </h1>
-
-          <p className="text-sm text-slate-400 mt-1">
-            Weather Dashboard
-          </p>
+          <p className="mt-1 text-small text-slate-400">Weather Dashboard</p>
         </div>
 
-        <nav>
-          <p className="text-[11px] uppercase tracking-[0.15em] text-slate-500 font-semibold mb-4">
+        <nav className="space-y-5 ">
+          <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-500">
             Overview
           </p>
 
-          <a
-            href="#"
-            className="flex items-center px-4 py-3 rounded-lg bg-sky-500 text-white text-sm font-medium"
-          >
-            Dashboard
-          </a>
-
-          <a
-            href="#"
-            className="flex items-center px-4 py-3 mt-2 rounded-lg text-slate-400 text-sm hover:bg-slate-800 hover:text-white"
-          >
-            Locations
-          </a>
-
-          <a
-            href="#"
-            className="flex items-center px-4 py-3 mt-2 rounded-lg text-slate-400 text-sm hover:bg-slate-800 hover:text-white"
-          >
-            Settings
-          </a>
+          {links.map(({ to, label, icon: Icon }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === "/"}
+              onClick={onClose}
+              className={({ isActive }) =>
+                `flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${
+                  isActive
+                    ? "bg-white/15 font-medium text-white shadow-lg shadow-sky-500/10 ring-1 ring-white/20"
+                    : "text-slate-400 hover:bg-white/10 hover:text-white"
+                }`
+              }
+            >
+              <Icon size={18} />
+              {label}
+            </NavLink>
+          ))}
         </nav>
 
-        <div className="absolute bottom-8 w-52">
-          <p className="text-xs text-slate-500">
-            SkyCast
-          </p>
-
-          <p className="text-xs text-slate-600 mt-1">
-            Simple weather insights
-          </p>
+        <div className="mt-auto">
+          <p className="text-xs text-slate-500">SkyCast</p>
+          <p className="mt-1 text-xs text-slate-600">Simple weather insights</p>
         </div>
       </aside>
     </>

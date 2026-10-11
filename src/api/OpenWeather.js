@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+console.log("Key:", API_KEY?.length, API_KEY?.slice(0, 4));
 const BASE_WEATHER_URL = "https://api.openweathermap.org/data/2.5";
 const GEO_URL = "https://api.openweathermap.org/geo/1.0/direct";
 
