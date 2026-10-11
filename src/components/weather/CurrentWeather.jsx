@@ -63,9 +63,9 @@ function CurrentWeather({ data, unit, convertTemp, isSaved, onToggleSave }) {
             {country ? `, ${country}` : ""}
           </div>
 
-          <h1 className="mt-5 text-8xl font-extralight leading-none tracking-tighter md:text-9xl">
+          <h1 className="mt-5 text-8xl gap-3 font-extralight leading-none tracking-tighter md:text-9xl items-baseline">
             {temp}°
-            <span className="ml-1 text-6xl font-light text-white/70">
+            <span className="ml-1 text-6xl md:text-8xl font-light text-white/70">
               {unit}
             </span>
           </h1>
