@@ -6,7 +6,7 @@ import Background from "../components/layout/Background";
 import PageHeader from "../components/layout/PageHeader";
 import WeatherIcon from "../components/weather/WeatherIcon";
 import { useApp } from "../context/AppContext";
-import { getCurrentWeather } from "../api/openweather";
+import { getCurrentWeather } from "../api/OpenWeather";
 
 function Locations({ onMenuClick }) {
   const { savedCities, removeCity, convertTemp, settings } = useApp();
