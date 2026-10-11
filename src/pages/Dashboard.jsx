@@ -35,46 +35,48 @@ const defaultGradient = "from-slate-950 via-blue-950 to-indigo-950";
 function createDailyForecast(forecastData) {
   if (!forecastData?.list) return [];
 
-  const days = {};
+  const timezoneOffset = forecastData.city?.timezone ?? 0;
+  const days = new Map();
 
   forecastData.list.forEach((item) => {
-    const date = new Date(item.dt * 1000);
-    const dateKey = date.toISOString().split("T")[0];
+    // Forecast item ko city ke local date mein convert karein
+    const cityDate = new Date((item.dt + timezoneOffset) * 1000);
+    const dateKey = cityDate.toISOString().slice(0, 10);
 
-    if (!days[dateKey]) {
-      days[dateKey] = {
-        date: date,
+    if (!days.has(dateKey)) {
+      days.set(dateKey, {
+        date: cityDate,
         temps: [],
         icons: [],
-      };
+      });
     }
 
-    days[dateKey].temps.push(item.main.temp);
-    days[dateKey].icons.push(item.weather[0].icon);
+    const day = days.get(dateKey);
+    day.temps.push(item.main.temp);
+    day.icons.push(item.weather[0].icon);
   });
 
-  return Object.values(days)
-    .slice(0, 5)
-    .map((day) => {
-      const iconCounts = {};
+  return [...days.values()].slice(0, 5).map((day) => {
+    const iconCounts = {};
 
-      day.icons.forEach((icon) => {
-        iconCounts[icon] = (iconCounts[icon] || 0) + 1;
-      });
-
-      const mostCommonIcon = Object.keys(iconCounts).reduce((a, b) =>
-        iconCounts[a] > iconCounts[b] ? a : b,
-      );
-
-      return {
-        day: day.date.toLocaleDateString([], {
-          weekday: "short",
-        }),
-        low: Math.round(Math.min(...day.temps)),
-        high: Math.round(Math.max(...day.temps)),
-        icon: mostCommonIcon,
-      };
+    day.icons.forEach((icon) => {
+      iconCounts[icon] = (iconCounts[icon] || 0) + 1;
     });
+
+    const mostCommonIcon = Object.keys(iconCounts).reduce((a, b) =>
+      iconCounts[a] > iconCounts[b] ? a : b,
+    );
+
+    return {
+      day: new Intl.DateTimeFormat("en-US", {
+        weekday: "short",
+        timeZone: "UTC",
+      }).format(day.date),
+      low: Math.round(Math.min(...day.temps)),
+      high: Math.round(Math.max(...day.temps)),
+      icon: mostCommonIcon,
+    };
+  });
 }
 
 function Dashboard({ onMenuClick }) {
