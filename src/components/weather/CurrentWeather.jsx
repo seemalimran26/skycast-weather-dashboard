@@ -65,7 +65,7 @@ function CurrentWeather({ data, unit, convertTemp, isSaved, onToggleSave }) {
 
           <h1 className="mt-5 text-8xl font-extralight leading-none tracking-tighter md:text-9xl">
             {temp}°
-            <span className="ml-1 text-8xl font-light text-white/70">
+            <span className="ml-1 text-7xxl font-light text-white/70">
               {unit}
             </span>
           </h1>
